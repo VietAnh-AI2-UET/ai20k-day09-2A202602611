@@ -4,9 +4,9 @@
 
 | | |
 |---|---|
-| Họ và tên | `<điền>` |
-| MSSV (đúng bằng `LAB_STUDENT_ID` trong `.env`) | `<điền>` |
-| GitHub | `<điền: tên tài khoản>` |
+| Họ và tên | `Bùi Việt Anh` |
+| MSSV (đúng bằng `LAB_STUDENT_ID` trong `.env`) | `2A202602611` |
+| GitHub | `VietAnh-AI2-UET` |
 | Trip dùng cho bài tập sập và chạy lại (xem GUIDE, bước 5) | `<điền: trip-xxxxx>` |
 
 ## Kết quả cuối
@@ -21,7 +21,19 @@
 ### Câu 1
 Liệt kê **ít nhất 4 khác biệt** giữa telemetry nguồn A và nguồn B mà bạn thấy ở bronze. Vì sao pipeline giữ **mỗi nguồn một bảng bronze** và để mọi cột ở dạng chữ, thay vì gộp và ép kiểu ngay?
 
-(trả lời ở đây)
+**Khác biệt:**
+
+- Khác số record: drive_a 3021 bản, drive_b 3234 bản
+- Khác format timestamp: drive_a dùng utc, drive_b dùng ms
+- Khác đơn vị đo vận tốc: drive_a dùng mps, b dùng kmh
+- drive_a dùng gas, b dùng throttle_pct
+
+**Lý do không ép kiểu ngay:**
+
+- Vì không phải trường nào chứa số cũng là số
+- Ép kiểu có thể làm mất thông tin
+- Có những ô không có giá trị
+- Bronze chỉ nên lưu giá trị thô, việc xử lý sẽ ở Silver
 
 ## Bước 2 · Silver telemetry
 
