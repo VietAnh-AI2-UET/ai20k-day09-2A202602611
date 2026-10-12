@@ -40,7 +40,31 @@ Liệt kê **ít nhất 4 khác biệt** giữa telemetry nguồn A và nguồn 
 ### Câu 2
 Pipeline đưa hai nguồn về một schema như thế nào (đơn vị, kiểu thời gian, **độ lệch đồng hồ**)? Bằng chứng nào trong kết quả bước 2 cho thấy đã đúng? Dán bảng quarantine của bạn (số dòng theo từng lý do, từng drive) và giải thích vì sao dòng lỗi vào `rejects` thay vì bị xoá.
 
-(trả lời ở đây)
+**Cách Pipeline đưa hai nguồn về một schema:**
+
+- Chuẩn hóa:
+    - Đơn vị: tốc độ B chia 3.6 để đổi km/h → m/s; ga/phanh B chia 100 để về khoảng 0–1 như A.
+    - Thời gian: A từ chuỗi ngày giờ, B từ số mili giây; cả hai chuyển thành kiểu thời gian có múi giờ.
+    - Độ lệch đồng hồ: B trừ telemetry_clock_offset_ms trước khi chuyển thời gian để khớp với video; A không cần điều chỉnh.
+
+- Đưa về cùng 1 bảng `silver_telemetry`:
+    - Nếu record đó hợp lệ
+    - Phân định nguồn bằng `drive_id`
+
+**Bằng chứng:**
+- Độ lệch đồng hồ:
+    ![Thời gian bắt đầu của drive_b sau khi chuẩn hóa](image.png)
+    - Thời gian bắt đầu camera trong data/sources.json: 2025-10-08T14:30:00+00:00
+    - Pipeline đã trừ đi một lượng telemetry_clock_offset_ms = 1500
+
+- Các trường khác được chuyển về cùng một đơn vị:
+    ![bảng silver.silver.telemetry](image-2.png)
+
+**Bảng quarantine:**
+    ![quarantine](image-3.png)
+
+**Tại sao dòng lỗi vào reject chứ không phải xóa:**
+- Để không làm mất dữ liệu, có thể kiểm tra nguyên nhân và xử lý lại khi sửa quy tắc. Đồng thời, bảng silver sạch chỉ giữ các dòng hợp lệ để phân tích.
 
 ### Câu 3
 Vì sao test `max_gap_ms` là `warn` còn `in_range` là `error`? Kết quả thí nghiệm `break-gate` của bạn (`break_gate.json`): test nào bắt được, bao nhiêu dòng, và điều đó cho biết gì về vai trò của "cổng chất lượng"?
