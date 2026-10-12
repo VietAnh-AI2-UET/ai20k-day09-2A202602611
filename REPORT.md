@@ -69,14 +69,24 @@ Pipeline đưa hai nguồn về một schema như thế nào (đơn vị, kiểu
 ### Câu 3
 Vì sao test `max_gap_ms` là `warn` còn `in_range` là `error`? Kết quả thí nghiệm `break-gate` của bạn (`break_gate.json`): test nào bắt được, bao nhiêu dòng, và điều đó cho biết gì về vai trò của "cổng chất lượng"?
 
-(trả lời ở đây)
+- `max_gap_ms` là khoảng cách giữa 2 lần đo cảm biến, khoảng cách hơi lớn thì có vẻ mất tín hiệu, nhưng chưa cần dừng pipeline. 
+
+- `in_range` là `error` vì tốc độ ngoài khoảng 0–70 m/s là dữ liệu không hợp lệ.
+
+- Test `in_range` bắt được 6 dòng khi nới luật lên 1000 m/s. Điều này cho thấy cổng chất lượng vẫn chặn lỗi khi bước làm sạch bị cấu hình sai. Sau khi khôi phục luật, không còn `ERROR`.
 
 ## Bước 3 · Silver frames
 
 ### Câu 4
 Dựa vào `idempotency.json`: số dòng trước và sau hai lần chạy lại, và khi ghi kiểu `append`. Vì sao Delta `overwrite` theo partition (một trip) an toàn hơn xoá rồi ghi lại, nhất là khi giữa chừng có lỗi?
 
-(trả lời ở đây)
+**Số dòng trước và sau 2 lần chạy:** 1246
+
+**Số dòng trước khi append:** 60
+
+**Số dòng sau khi append:** 120
+
+**Lý do Delta overwrite:** Vì append thì sẽ duplicate
 
 ### Câu 5
 Khung hình **đen** và khung hình **tối** khác nhau thế nào, pipeline xử lý khác nhau ra sao, bạn có đồng ý không? Dựa vào `threshold.json`: nếu chọn ngưỡng 0, 2, 6 thì bao nhiêu khung bị coi là trùng ở mỗi drive? Bạn chọn ngưỡng nào, vì sao, và ngưỡng đó phụ thuộc vào tốc độ xe thế nào?
