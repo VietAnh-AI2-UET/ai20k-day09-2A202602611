@@ -97,7 +97,9 @@ Khung hình **đen** và khung hình **tối** khác nhau thế nào, pipeline x
 | 2 | | |
 | 6 | | |
 
-(trả lời ở đây)
+- Khung đen là mất hình, khung tối là ánh sáng yếu (đi qua hầm, ban đêm, ...)
+
+- Pipeline gắn cờ is_black = True cho khung đen, loại khỏi Gold, is_dark = True cho tối, có để giữ lại trong Gold
 
 ## Bước 4 · Gold
 
