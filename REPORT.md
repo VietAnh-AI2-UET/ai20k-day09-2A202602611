@@ -7,7 +7,9 @@
 | Họ và tên | `Bùi Việt Anh` |
 | MSSV (đúng bằng `LAB_STUDENT_ID` trong `.env`) | `2A202602611` |
 | GitHub | `VietAnh-AI2-UET` |
-| Trip dùng cho bài tập sập và chạy lại (xem GUIDE, bước 5) | `<điền: trip-xxxxx>` |
+| Trip dùng cho bài tập sập và chạy lại (xem GUIDE, bước 5) | `trip-04324` |
+
+***Riêng bước 5 dùng mssv = 02611, các bước trước đó dùng 2A202602611***
 
 ## Kết quả cuối
 
@@ -143,7 +145,9 @@ Vì sao `dataset_version` là **băm nội dung** chứ không phải ngày gi�
 ### Câu 9
 Mô tả chính xác điều xảy ra khi trip của bạn sập rồi chạy lại: bao nhiêu task chuyển đỏ, bao nhiêu task `upstream_failed`, bạn clear gì, dữ liệu có nhân đôi không, `dataset_version` có đổi không? Bằng chứng (ảnh, số) là gì?
 
-(trả lời ở đây)
+- 1 task đỏ: silver_frame[26]; 7 `upstream_failed`; clear task đỏ, dữ liệu không nhân đôi, `dataset_version` không đổi
+
+- **Evidences:** Please find in report/screenshots
 
 ### Câu 10
 Nâng từ 2 drive lên **500 xe mỗi ngày**: ba thành phần nào của pipeline này sẽ vỡ đầu tiên, và bạn thay bằng gì (nối với slide 12, 22, 23)?
@@ -160,4 +164,4 @@ Câu SQL bạn thêm vào dashboard và điều nó cho biết:
 
 Điều bạn thấy bất ngờ nhất, điều gì còn chưa rõ, và một lỗi dữ liệu mà bạn nghĩ pipeline **chưa** bắt được (nếu có). Tối đa 8 dòng.
 
-(trả lời ở đây)
+- **Điều bạn thấy bất ngờ nhất:** 
