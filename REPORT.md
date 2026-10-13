@@ -114,17 +114,29 @@ Khung hình **đen** và khung hình **tối** khác nhau thế nào, pipeline x
 ### Câu 6
 Dựa vào `leakage.json`: chia theo khung hình làm bao nhiêu trip bị chia cắt, so với chia theo trip? Vì sao điều này làm điểm kiểm thử đẹp một cách giả tạo?
 
-(trả lời ở đây)
+- **Chia theo khung hình:** cả 26/26 trip bị chia vào nhiều tập.
+- **Chia theo trip:** 0 trip nào bị chia cắt; mỗi trip chỉ nằm trong một tập.
+- **Điểm kiểm thử đẹp giả tạo:** chia theo khung hình kiến các khung trong cùng một trip có cả ở train và test, mô hình học trên tập train và gần như biết trước test, nên điểm cao, nhưng không có nghĩa là có khả năng dự đoán tốt trên trip mới trên thực tế.
 
 ### Câu 7
 Vì sao `dataset_version` là **băm nội dung** chứ không phải ngày giờ hay số đếm? Hai lần chạy liên tiếp cho kết quả gì? Vì sao `dataset_version` của bạn **khác** bạn bè dù cùng dữ liệu (liên hệ MSSV)?
 
-(trả lời ở đây)
+- `dataset_version` dùng **băm nội dung** để cùng nội dung thì có cùng mã, nội dung đổi thì mã đổi.
+- Hai lần chạy liên tiếp cho ra kết quả giống nhau, vì nội dung giống nhau.
+- Nếu dùng ngày giờ hoặc số đếm, mỗi lần chạy có thể tạo mã mới dù dataset không thay đổi, khiến khó nhận biết hai phiên bản có thực sự khác nhau hay không.
+- **MSSV được dùng để chia dữ liệu** vào `train`, `val`, `test`. MSSV khác nhau khiến các trip được phân vào các tập khác nhau.
+- Vì vậy, dù dữ liệu đầu vào giống nhau, dataset sau khi chia khác nhau nên `dataset_version` cũng khác nhau.
 
 ### Câu 8
 Đọc phần `lineage` trong `manifest.json` của dataset bạn. Trả lời "dataset này được tạo từ dữ liệu nào?" bằng chính nội dung đó. Nếu một người hỏi 3 tháng sau, thông tin nào giúp tái tạo lại đúng dataset này?
 
-(trả lời ở đây)
+- dataset được tạo từ:
+  - `bronze.raw_telemetry_a`, `bronze.raw_telemetry_b`, `bronze.trips_raw`: phiên bản **0**.
+  - `bronze.video_files`: phiên bản **1**.
+  - `silver.frames`: phiên bản **27**.
+  - `silver.telemetry`, `silver.frames_flagged`, `silver.frame_telemetry`: phiên bản **0**.
+- **Để tái tạo sau 3 tháng:** cần giữ đúng các phiên bản bảng trên, video gốc có mã `input_video_sha256` khớp, cùng quy tắc lọc và chia dữ liệu, cùng MSSV **`2A202602611`**.
+- **Để đối chiếu kết quả:** dùng `dataset_version` **`407a0a8953a0`** và `manifest_sha256`.
 
 ## Bước 5 · Điều phối và phục vụ
 
