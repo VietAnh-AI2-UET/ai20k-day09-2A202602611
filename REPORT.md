@@ -93,13 +93,21 @@ Khung hình **đen** và khung hình **tối** khác nhau thế nào, pipeline x
 
 | dHash khác tối đa | số khung trùng, drive A | số khung trùng, drive B |
 |---|---|---|
-| 0 | | |
-| 2 | | |
-| 6 | | |
+| 0 | 61 | 8 |
+| 2 | 149 | 53 |
+| 6 | 363 | 244 |
 
 - Khung đen là mất hình, khung tối là ánh sáng yếu (đi qua hầm, ban đêm, ...)
 
 - Pipeline gắn cờ is_black = True cho khung đen, loại khỏi Gold, is_dark = True cho tối, có để giữ lại trong Gold
+
+- Đồng ý
+
+- Ngưỡng 0: drive A có 61 khung trùng, drive B có 8; ngưỡng 2: 149 và 53; ngưỡng 6: 363 và 244.
+
+- Chọn ngưỡng 2 vì ngưỡng 0 dễ bỏ sót khung gần trùng, còn ngưỡng 6 dễ loại nhầm khung có cảnh khác nhau.
+
+- Với cùng số khung lấy mỗi giây, xe chạy chậm thì cảnh ít thay đổi, dễ có khung trùng; xe chạy nhanh thì cảnh thay đổi nhiều hơn.
 
 ## Bước 4 · Gold
 
