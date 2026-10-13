@@ -164,10 +164,20 @@ Nâng từ 2 drive lên **500 xe mỗi ngày**: ba thành phần nào của pipe
 
 Câu SQL bạn thêm vào dashboard và điều nó cho biết:
 
-(trả lời ở đây)
+```SQL
+SELECT
+    drive_id,
+    flagged_dark_kept AS dark_frames
+FROM marts.mart_frame_funnel
+WHERE flagged_dark_kept > 0;
+```
+
+- drive_a = 4; drive_b = 61
 
 ## Nhìn lại
 
 Điều bạn thấy bất ngờ nhất, điều gì còn chưa rõ, và một lỗi dữ liệu mà bạn nghĩ pipeline **chưa** bắt được (nếu có). Tối đa 8 dòng.
 
-- **Điều bạn thấy bất ngờ nhất:** 
+- **Điều thấy bất ngờ nhất:** Không quá quen dùng Minio, Airflow, nên chưa biết bất ngờ gì, ấy pipeline xử lý khá ổn
+
+- **điều gì còn chưa rõ:** Chưa hoàn toàn nắm được cách pipeline xử lý dữ liệu
