@@ -152,7 +152,13 @@ Mô tả chính xác điều xảy ra khi trip của bạn sập rồi chạy l�
 ### Câu 10
 Nâng từ 2 drive lên **500 xe mỗi ngày**: ba thành phần nào của pipeline này sẽ vỡ đầu tiên, và bạn thay bằng gì (nối với slide 12, 22, 23)?
 
-(trả lời ở đây)
+- silver_frames, dbt_run_silver, export_dataset sẽ vỡ đầu tiên
+
+**Thay thế:**
+
+- silver_frames: Chia trip cho nhiều máy xử lý, giảm tải CPU
+- dbt_run_silver: Thay DuckDB bằng Spark để chia việc cho nhiều máy; chỉ đưa thông tin khung hình vào bảng, không đưa video.
+- export_dataset: saoDùng danh sách đường dẫn ảnh để tạo bộ train/val/test, hạn chế sao chép ảnh sang nơi khác.
 
 ## Câu hỏi riêng của bạn trên Metabase
 
